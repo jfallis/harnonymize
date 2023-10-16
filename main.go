@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"harnonymise/pkg/harnonymize"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -14,6 +15,7 @@ func main() {
 		panic(err)
 	}
 
+	path = filepath.ToSlash(path)
 	path = path[:strings.LastIndex(path, "/")]
 	entries, err := os.ReadDir(path)
 	if err != nil {
