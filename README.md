@@ -6,12 +6,12 @@ This software is designed to ensure that sensitive information included in HAR f
 
 ## How to use
 
-The bin folder contains pre-compiled binaries for three major operating systems: Windows, Linux, and Mac OS X. These binaries are ready to use, eliminating the need for users to compile the source code before running the application.
+The `HARnonymize.zip` zipped file contains pre-compiled binaries for three major operating systems: Windows, Linux, and Mac OS X. These binaries are ready to use, eliminating the need for users to compile the source code before running the application.
 
 - Windows: `harnonymize-windows.exe`
 - Linux: `harnonymize-linux`
-- Mac OS X: `harnonymize-amd64-macos`
-- Mac OS X (ARM): `harnonymize-arm64-macos`
+- Mac OS X (Before 2020 laptops): `harnonymize-amd64-macos`
+- Mac OS X (Latest laptops): `harnonymize-arm64-macos`
 
 To use the tool, first download the appropriate binary for your operating system. 
 
