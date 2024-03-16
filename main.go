@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"harnonymise/pkg/harnonymize"
 	"os"
 	"path/filepath"
@@ -10,31 +9,24 @@ import (
 )
 
 func main() {
-	path, err := os.Executable()
-	if err != nil {
-		panic(err)
-	}
-
-	path = filepath.ToSlash(path)
-	path = path[:strings.LastIndex(path, "/")]
-	entries, err := os.ReadDir(path)
-	if err != nil {
-		panic(err)
-	}
+	path, _ := os.Executable()
+	path = filepath.Dir(path)
+	entries, _ := os.ReadDir(path)
 	keywords := ReadBlockContextKeywords(path)
 
 	anon := harnonymize.New()
 	anon.BlockContentKeywords = keywords
 	for _, entry := range entries {
 		har := harnonymize.NewHAR(path, entry.Name())
-		if readErr := anon.Read(har); readErr != nil {
-			if errors.Is(readErr, harnonymize.ErrNotHARFile) {
+		if err := anon.Read(har); err != nil {
+			if errors.Is(err, harnonymize.ErrNotHARFile) {
 				continue
 			}
-			panic(readErr)
-		}
 
+			panic(err)
+		}
 		anon.Anonymize(har)
+
 		if wErr := anon.Write(har); wErr != nil {
 			panic(wErr)
 		}
@@ -42,12 +34,6 @@ func main() {
 }
 
 func ReadBlockContextKeywords(path string) []string {
-	name := fmt.Sprintf("%s/%s", path, "block.txt")
-	context, readErr := os.ReadFile(name)
-	if readErr != nil {
-		return nil
-	}
-
-	keywords := strings.Split(strings.ToLower(string(context)), "\n")
-	return keywords
+	content, _ := os.ReadFile(filepath.Join(path, "block.txt"))
+	return strings.Split(strings.ToLower(string(content)), "\n")
 }

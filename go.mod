@@ -1,10 +1,10 @@
 module harnonymise
 
-go 1.21
+go 1.22
 
 require (
-	github.com/chromedp/cdproto v0.0.0-20231011050154-1d073bb38998
-	github.com/stretchr/testify v1.8.4
+	github.com/chromedp/cdproto v0.0.0-20240312231614-1e5096e63154
+	github.com/stretchr/testify v1.9.0
 )
 
 require (

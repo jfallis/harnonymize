@@ -1,3 +1,5 @@
 .DS_Store
+anonymized_*.har
 .idea/
-HARnonymize/
+jfallis/
+vendor/
